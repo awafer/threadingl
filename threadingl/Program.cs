@@ -13,10 +13,9 @@ namespace threadingl
 
             Thread worker = new Thread(() =>
             {
-                // do work
-                while (true)//!workerShouldStop)
+                // receive message.
+                while (true)
                 {
-                    //TimedReadline();
                     y = Console.CursorTop;
 
                     // Force a scroll if we're at the end of the buffer
@@ -26,14 +25,18 @@ namespace threadingl
                         Console.SetCursorPosition(0, --y);
                     }
 
-                    Thread.Sleep(2000);
-                    if (Console.CursorTop != y)
+                    Thread.Sleep(2000);//TODO:change to timer
+
+                    if (Console.CursorTop != y)//for multiple input, if the user input something, y will change.
+                    {
                         continue;
+                    }                    
+
                     int x = Console.CursorLeft;
-                    Console.MoveBufferArea(0, y, Console.WindowWidth, 1, 0, y + 1);
-                    Console.SetCursorPosition(0, y);
+                    Console.MoveBufferArea(0, y, Console.WindowWidth, 1, 0, y + 1);//move the current line to next line, if the console start a new line, will move only the line at the bottom.
+                    Console.SetCursorPosition(0, y);//back to previous line
                     Console.Write("I just waited 2 seconds.");
-                    Console.SetCursorPosition(x, y + 1);
+                    Console.SetCursorPosition(x, y + 1);//move the cursor to where it was
 
                     //Console.WriteLine("doing things ...");
                 };
