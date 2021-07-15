@@ -30,7 +30,7 @@ namespace threadingl
                     if (Console.CursorTop != y)//for multiple input, if the user input something, y will change.
                     {
                         continue;
-                    }                    
+                    }
 
                     int x = Console.CursorLeft;
                     Console.MoveBufferArea(0, y, Console.WindowWidth, 1, 0, y + 1);//move the current line to next line, if the console start a new line, will move only the line at the bottom.
